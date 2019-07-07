@@ -1,0 +1,80 @@
+{% extends 'home.html' %}
+
+{% block body %}
+
+<style type="text/css">
+  
+#emailbox
+{
+    padding-left: 80px;
+}
+
+#passwordbox
+{
+  padding-left: 80px;
+}
+
+#usernamebox
+{
+  padding-left: 80px;
+}
+
+#fnbox
+{
+  padding-left: 80px;
+}
+
+#lnbox
+{
+  padding-left: 80px;
+}
+
+</style>
+
+    <div class = "container">
+
+      <form method = "post">
+
+        {% csrf_token %}
+
+        <div class="form-group row">
+
+          <div id = "usernamebox" class="col-sm-6">
+
+        <input  type = "text" name = "username" placeholder="Your user name">
+
+          </div>
+
+        
+
+        <div class="form-group row">
+
+          <div id = "passwordbox" class="col-sm-8">
+
+          <input type = "password" name = "password"  placeholder="Your Password">
+
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+
+        <button class="btn btn-success" href = "http://127.0.0.1:8000/webapp/subjects" id = "myButton"> Submit </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+    <script type="text/javascript">
+
+      document.getElementById("myButton").onclick = function () 
+      {
+        alert('You pressed submit!');
+        windows.location = "http://127.0.0.1:8000/webapp/subjects";
+      };
+
+    </script>
+    
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<style type="text/css">
+	
+	#welcome-box
+	{
+		margin-top: 100px;
+		width: 1000px;
+		margin-left: 200px;
+	}
+
+</style>
+
+<head>
+	<title> Attendance | Be Present. Always. </title>
+</head>
+
+<body>
+
+	<!--Libraries of Bootstrap, JQuery-->
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+
+    <!--Jumbotron-->
+    
+	<div id = "welcome-box" class="jumbotron">
+		<center>
+  		<h1 class="display-4">Attendance</h1>
+  		<p class="lead">Be present. Always.</p>
+		<hr class="my-4">
+		<p>Keep your attendance in track with this application.</p>
+		{% block login %}
+		{% endblock %}
+		<br>
+		<p> Not registered, yet?
+		<p> Register <a href="register">here</a>.</p>
+		</p>
+		</center>
+	</div>
+
+    <!--Login or Register-->
+
+
+</body>
+
+</html>

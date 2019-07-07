@@ -1,0 +1,15 @@
+{% extends 'profile.html' %}
+{% block subject_details %}
+	{% if size == 0 %}
+		<p> You currently do not have a semester ready.</p>
+	{% else %}
+		<p> Your subjects : </p>
+		{% for subject in subjects %}
+			<p>
+				<a href = "#">{{subject.subject}}</a>
+				<p>{{subject.threshold}}%</p>
+				<p>{{subject.percent}}</p>
+			</p> 
+		{% endfor %}
+	{% endif %}
+{% endblock %}

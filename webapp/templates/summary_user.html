@@ -1,0 +1,51 @@
+{% extends 'summary.html' %}
+
+{% block back %}
+
+<a class="navbar-brand" style = "color: white;" href="{% url 'takeSubjects' %}?username={{user.username}}">Back </a>
+
+{% endblock %}
+
+{% block content %}
+
+	{% if length > 0 %}
+            <div id = "subjects">
+            <p> Your subjects: </p>
+		{% for sub in s_list %}
+
+		    		<a href = "{% url 'sub_sum' %}?username={{user.username}}&subject={{sub.subject}}"  class = "s_name" name="sub_name">{{sub.subject}}</a>
+		    		<br>
+		    		
+		{% endfor %}
+      		<div class="form-group row">
+              	   <button class = "btn btn-success" style = "padding-left: 20px" id = "myButton"> Submit </button>
+                  </div>
+            </div>
+
+	{% else %}
+
+		<p> There are no records in the system yet. </p>
+
+	{% endif %}
+
+	
+	<script type="text/javascript">
+
+      </script>
+
+
+	<style type = "text/css">
+
+      #subjects
+      {
+            padding-left: 500px;
+            padding-top: 100px;
+      }
+      .form-group row
+      {
+            
+      }
+	</style>
+	
+
+{% endblock %}

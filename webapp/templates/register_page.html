@@ -1,0 +1,61 @@
+{% extends 'home.html' %}
+
+{% block body %}
+<style type="text/css"> 
+#emailbox
+{
+    padding-left: 80px;
+}
+#passwordbox
+{
+  padding-left: 80px;
+}
+#usernamebox
+{
+  padding-left: 80px;
+}
+#fnbox
+{
+  padding-left: 80px;
+}
+#lnbox
+{
+  padding-left: 80px;
+}
+</style>
+    <div class = "container">
+      <center>
+      <form method = "post">
+        {% csrf_token %}
+        <div class="form-group row">
+          <div id = "usernamebox" class="col-sm-6">
+        <input  type = "text" name = "username" placeholder="Your user name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div id = "emailbox"  class="col-sm-8">
+        <input type = "email" name = "email" placeholder="Your Email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div id = "passwordbox" class="col-sm-8">
+          <input type = "password" name = "password"  placeholder="Your Password">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div id = "fnbox"  class="col-sm-8">
+          <input type = "text" name = "first_name" placeholder="Your first name">
+        </div>
+      </div>
+        <div class="form-group row">
+          <div id = "lnbox" class="col-sm-8">
+            <input type = "text" name = "last_name"  placeholder="Your last name">
+          </div>
+        </div>
+        <div class="form-group row">
+        <button class="btn btn-success" href = "{% url 'subjects' %}" id = "myButton"> Register </button>
+        </div>
+      </form>
+    </center>
+    </div>
+{% endblock %}

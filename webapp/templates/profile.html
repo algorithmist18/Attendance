@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+	<title> Subjects </title>
+
+	<style type="text/css">
+
+		.navbar-brand
+		{
+			float: left;
+		}
+
+		#subjectTitle
+		{
+			padding-left: 500px;
+			padding-right: 300px;
+		}
+
+
+		#subjectForm
+		{
+			padding-left: 500px;
+			padding-top: 250px;
+		}
+
+		#buttons
+		{
+			position: absolute;
+			bottom: -40px;
+		}
+
+		#navbar
+		{
+			background-color: #2471A3;
+		}
+
+		#nav-elems
+		{
+			color: white;
+		}
+
+		#subjects
+		{
+			float: left;
+			margin-top: 100px;
+			margin-left: 50px;
+			margin-right: 200px;
+		}
+	</style>
+</head>
+<body>
+	<nav id = "navbar" class="navbar navbar-light">
+		<div id="nav-elems">
+  			<a class="navbar-brand" style = "color: white; font-size: 18px;" href="{% url 'logout' %}">Logout</a>
+        		{% block content %}
+    			{% endblock %}
+    	</div>
+	</nav>
+	<!--Subjects for user-->
+	<div id = "subjects">
+		{% block subject_details %}
+		{% endblock %}
+	</div>
+	<p style="margin-top: 100px;"> Enter a new semester <a href = "#"> here. </a></p>
+	<!--Performance analysis-->
+	<div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'subjects.html' %}
+
+{% load staticfiles %}
+
+<style>
+
+.body
+{
+		background-image:url('static/background.JPG');
+		background-repeat:no-repeat;
+		background-size:100%;
+}
+
+</style>
+
+{% block content %}
+
+	<a style = "color: white; font-size: 18px;" class="navbar-brand" href="{% url 'summary' %}?username={{username}}">Summary</a>
+	<span style = "color: white; font-size: 18px;" class="navbar-brand"> Hello, <span id = "username">{{first_name}}</span>.</span>
+
+{% endblock %}
+
+{% block subjects %}
+	<div id = "subjectForm" style="padding-top: 180px; padding-left: -2px;">
+		<form action="{% url 'takeSubjects' %}?username={{username}}" method="POST">	
+			{% csrf_token %}
+				<div class="col-xs-6">
+			    	<label for="ex3" style="padding-left: 150px;">Subjects</label>
+			    	<input class="form-control" id="ex3" type="text" name = "subject">
+			    	<label for="ex3" style="padding-left: 150px;">Threshold</label>
+			    	<input class="form-control" id="ex2" type="number" name = "threshold">
+		  		</div>
+		  		<div id = "buttons" style = "padding-left: 30px;">
+		  			<input type="submit" class="btn btn-primary" value = "Add Subject" onclick = "submitForm()">
+		  			<input type="button" class="btn btn-success" value = "Finish">
+		  			<input type="submit" class="btn btn-success" value = "Change threshold">
+		  		</div>
+		  		<br>
+	  	</form>
+  	</div>
+{% endblock %}

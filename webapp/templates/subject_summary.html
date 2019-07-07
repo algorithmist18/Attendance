@@ -1,0 +1,159 @@
+{% extends 'summary.html' %}
+
+{% block back %}
+
+  <a class="navbar-brand" href="{% url 'summary' %}?username={{username}}">Back </a>
+
+{% endblock %}
+
+{% block content %}
+		
+		<div class = "container">
+			<form method="post" id = "subject_form">
+				{% csrf_token %}
+				  <br>
+				  <br>
+		    	   <p class = "s_name" name="sub_name">{{sub.subject}}:</p>
+		    	<br>
+		    	  <input id="threshold" type="text" name="s_threshold" value = "{{sub.threshold}}" readonly>
+              <br>
+		    	  <input id="present" type="text" name="s_present" value = "{{ sub.present }}" readonly>
+              <br>
+		    	  <input id="total" type="text" name="s_total" value = "{{ sub.total }}" readonly>
+              <br>
+		    	  <input id="percent" type = "text" name="s_percent" value = "{{sub.percent}}%" readonly>
+              <br>
+            <input id = "safe_bunks" type = "text" name = "s_bunks" value = "{{sub.safe_bunks}}" readonly>
+              <br>
+              <br>
+		    	  <input type="button" class = "pr_button" value="Present" onclick = "increment()">
+		    	  <input type="button" class = "ab_button" value="Absent">
+		    	  <input type="button" class = "inc_t" value="+">
+		    	  <input type="button" class = "dec_t" value="-">
+		    	  <br>
+		    	  <br>	
+		          <div class="form-group row">
+        	       <button class = "btn btn-success" id = "myButton"> Submit </button>
+              </div>
+            </form>
+            <textarea form = "subject_form" rows = "6" cols = "50" name = 's_notes'>{{sub.notes}}</textarea>
+              <br>
+              <br>
+              <br>
+	     </div>
+    <script type="text/javascript">
+    		var present = document.getElementById('present');
+    		var total = document.getElementById('total');
+        var threshold = document.getElementById('threshold');
+    		var percent = document.getElementById('percent');
+        var safe = document.getElementById('safe_bunks');
+    		$(".pr_button").click
+          (
+          	function()
+          	{
+          		present.value = (Number(present.value) + 1).toString();
+          		total.value = (Number(total.value) + 1).toString();
+          		percent.value = ((present.value / total.value)*100);
+
+               if(!Number.isInteger((present.value / total.value)))
+               {
+                  percent.value = ((present.value / total.value)*100).toFixed(2);
+               }
+
+         
+                if(percent.value > threshold.value)
+                {
+                   safe.value = ((((Number(present.value)*100) - (Number(total.value) * threshold.value)))/(threshold.value));
+                }
+                else
+                {
+                   safe.value = 0;
+                }
+
+                percent.value += '%';
+
+             });
+          
+
+          	$(".ab_button").click
+             (
+          	function()
+          	{
+          		total.value = (Number(total.value) + 1).toString();
+                      percent.value = ((present.value / total.value)*100);
+
+                    
+                  if(!Number.isInteger(percent.value))
+                 {
+                    percent.value = ((present.value / total.value)*100).toFixed(2);
+                 }
+       
+
+                if(percent.value > threshold.value)
+                {
+                   safe.value = ((((Number(present.value)*100) - (Number(total.value) * threshold.value)))/(threshold.value));
+                }
+                else
+                {
+                   safe.value = 0;
+                }
+
+                percent.value += '%';
+          	});	
+
+          	$(".inc_t").click(
+          	function()
+          	{
+                total.value = (Number(total.value) + 1).toString();
+                percent.value = ((present.value / total.value)*100).toFixed(2);
+
+                if(!Number.isInteger(percent.value))
+                 {
+                    percent.value = ((present.value / total.value)*100).toFixed(2);
+                 }
+
+               if(percent.value > threshold.value)
+                {
+                   safe.value = ((((Number(present.value)*100) - (Number(total.value) * threshold.value)))/(threshold.value));
+                }
+                else
+                {
+                   safe.value = 0;
+                }
+
+                percent.value += '%';
+          	});	
+
+          	$(".dec_t").click(
+          	function()
+          	{
+          	    total.value = (Number(total.value) - 1).toString();
+                 
+                 percent.value = ((present.value / total.value)*100);
+
+                 if(!Number.isInteger(percent.value))
+                 {
+                    percent.value = ((present.value / total.value)*100).toFixed(2);
+                 }
+
+                if(percent.value > threshold.value)
+                {
+                   safe.value = ((((Number(present.value)*100) - (Number(total.value) * threshold.value)))/(threshold.value));
+
+                }
+                else
+                {
+                   safe.value = 0;
+                }
+
+                percent.value += '%';
+          	});	
+        </script>
+    	<style type = "text/css">
+      	.subject
+      	{
+      		background: #58D68D;
+      		width: 100px;
+      	}
+    	</style>
+{% endblock %}
