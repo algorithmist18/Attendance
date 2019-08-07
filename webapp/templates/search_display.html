@@ -1,0 +1,21 @@
+{% extends 'search_display_base.html' %}
+
+{% block navbar %}
+	<nav id = "navbar" class="navbar navbar-light">
+	<div id = "navbar">
+		<span class = "navbar-brand" style="color: white; font-size: 12px;">Attendance </span> 
+		<a class="navbar-brand" style = "color: white; margin-left: 1000px; font-size: 12px;" href="{% url 'edit_profile' %}?user={{user.username}}">Edit profile</a>
+		<a class="navbar-brand" style = "color: white; margin-left: 10px; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+	</div>
+	</nav>
+{% endblock %}
+
+{% block content %}
+	<div id = "search-results">
+		<p> Your search results: </p>
+		{% for result in users %}
+		<a href = "{% url 'profile' %}?user={{user.username}}&q={{result.username}}"> {{result.first_name}} {{result.last_name}} </a>
+		<p> {{user.institute}} </p>
+		{% endfor %}
+	</div>
+{% endblock %}

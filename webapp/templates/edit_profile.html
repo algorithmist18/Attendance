@@ -1,0 +1,18 @@
+{% extends 'edit_profile_base.html' %}
+{% block details %}
+
+	<!--Display user form-->
+	<form method="post" action="{% url 'edit_profile' %}?user={{user.username}}" id = "user-form">
+		{% csrf_token %}
+		First Name: <input type="text" name="first_name" value="{{user.first_name}}"><br><br>
+		Last Name: <input type="text" name="last_name" value="{{user.last_name}}"><br><br>
+		Institute: <input style="margin-left: 12px;" type="text" name="institute" value="{{user.profile.institute}}"><br><br>
+		Birth-Date: <input type="text" name="birth_date" value="{{user.profile.birth_date}}"><br><br>
+		<input style="font-size: 12px; margin-left: 60px;" class="btn btn-success" type="submit" name="action" value="Save"><br>
+	</form>
+
+	{% if message != None %}
+	<p> {{message}} </p>
+	{% endif %}
+	
+{% endblock %}

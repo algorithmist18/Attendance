@@ -6,43 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-	<title> Subjects </title>
+	<title> Edit profile </title>
 
 	<style type="text/css">
-
-		body
-		{
-			font-size: 12px;
-		}
-
-		.navbar-brand
-		{
-			float: left;
-		}
-
-		#subjectTitle
-		{
-			padding-left: 500px;
-			padding-right: 300px;
-		}
-
-
-		#subjectForm
-		{
-			padding-left: 500px;
-			padding-top: 250px;
-		}
-
-		#buttons
-		{
-			padding-top: 5px;
-			position: relative;
-		}
-
 		#navbar
 		{
 			background-color: #2471A3;
@@ -50,26 +18,28 @@
 
 		#nav-elems
 		{
-			font-size: 14px;
 			color: white;
 		}
 
+		#user-form
+		{
+			margin-left: 500px;
+			margin-top: 100px;
+		}
 	</style>
 </head>
-
-<body>
-
+<body style="font-size: 12px;">
 	<nav id = "navbar" class="navbar navbar-light">
 		<div id="nav-elems">
-        {% block content %}
-    	{% endblock %}
+  			<a class="navbar-brand" style = "color: white; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+        		{% block content %}
+    			{% endblock %}
     	</div>
 	</nav>
-		<!--Entering subjects-->
-		<div id = "subjectsEntry">
-			{% block subjects %}
-  			{% endblock %}
-  		</div>
-  		
+	<!--Subjects for user-->
+	{% block details %}
+	{% endblock %}
+	<div>
+	</div>
 </body>
 </html>

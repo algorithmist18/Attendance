@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<style type="text/css">
+	#form
+	{
+		margin-top: 140px;
+	}
+	#navbar
+	{	
+		background-color: #2471A3;
+	}
+</style>
+<html>
+<head>
+	<title> Semester Details </title>
+</head>
+<body>
+	<!--Insert code for bootstrap, JS, jQuery-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+	<!--Code for navigation bar-->
+	{% block navbar %}
+	{% endblock %}
+	<!--Semester input form-->
+	<center>
+	{% block content %}
+	{% endblock %}
+	</center>
+</body>
+</html>

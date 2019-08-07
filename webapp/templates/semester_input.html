@@ -1,0 +1,29 @@
+{% extends 'semester.html' %}
+{% block navbar %}
+<nav id = "navbar" class="navbar navbar-light">
+  	<a class="navbar-brand" style = "color: white; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+    <a class="navbar-brand" style = "color: white; font-size: 12px;" href="{% url 'profile' %}?user={{username}}">Hello, {{username}}</a>
+</nav>
+{% endblock %}
+{% block content %}
+	{% if message != None %}
+	{% if type == 'success' %}
+	<div class="alert alert-success" role="alert">
+  		Semester added succesfully.
+  	</div>
+  	{% else %}
+  	<div style = "font-size: 12px;" class="alert alert-danger" role="alert">
+  		{{message}}
+  	</div>
+	{% endif %}
+	{% endif %}
+	<div style = "font-size: 12px;" id = "form">
+	<form method = "post" action="{% url 'semester' %}?user={{username}}">
+	{% csrf_token %}
+		<p>Semester no: </p><input type="text" name="sem"/><br><br>
+		<p>Start date: </p><input type="text" name="start_date"/><br><br>
+		<p>End date: </p><input type="text" name="end_date"/><br><br>
+		<input style = "font-size: 12px;" class = "btn btn-success" type="submit" name="Create"/>
+	</form>
+	</div>
+{% endblock %}

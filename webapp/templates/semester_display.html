@@ -1,0 +1,32 @@
+{% extends 'semester_display_base.html' %}
+
+{% block content %}
+<nav id = "navbar" class="navbar navbar-light">
+  	<a class="navbar-brand" style = "color: white; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+    <a class="navbar-brand" style = "color: white; font-size: 12px;" href="{% url 'profile' %}?user={{user.username}}">Hello, {{user.username}}</a></p>
+</nav>
+{% endblock %}
+{% block subject_details %}
+	<div id = "subjects">
+	<p>Your subjects for Semester {{semester.semester_no}}: </p>
+	{% if subjects is None %}
+		<p> Your semester does not have any subjects yet. 
+		Add some <a href = "subjects?user={{user.username}}&s_id={{semester.semester_no}}"> here.</a></p>
+	{% else %}
+	{% for subject in subjects %}	
+		<p> <a href="{% url 'sub_sum' %}?user={{user.username}}&s_id={{semester.semester_no}}&subject={{subject.subject}}"> {{subject.subject}} </a> {{ subject.code }} </p>
+		<p> Attendance : {{subject.percent}}% </p>
+		<p> Threshold : {{subject.threshold}}% </p>
+	{% endfor %}
+	{% endif %}
+	<form method="post" action="{% url 'show_semester' %}?user={{user.username}}&s_id={{semester.semester_no}}">
+		{% csrf_token %}
+		<input type="submit" name="button" value="Delete"/>
+		<input type="submit" name="button" value="Add"/>
+	</form>
+	</div>
+	<p style="font-size: 12px; margin-top: 100px;"> Make your semester routine <a href = "routine?user={{user.username}}&s_id={{semester.semester_no}}"> here. </a></p>
+{% endblock %}
+
+
+

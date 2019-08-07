@@ -1,0 +1,47 @@
+{% extends 'profile.html' %}
+{% block content %}
+<span class = "navbar-brand" style="color: white; font-size: 12px;">Attendance </span> 
+<a class="navbar-brand" style = "color: white; margin-left: 1000px; font-size: 12px;" href="{% url 'edit_profile' %}?user={{org_user.username}}">Edit profile</a>
+<a class="navbar-brand" style = "color: white; margin-left: 10px; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+{% endblock %}
+{% block subject_details %}
+	<div id = "search-bar">
+		<form method="post" action="{% url 'profile' %}?user={{org_user.username}}">
+			{% csrf_token %}
+			<input type="text" placeholder="Search.." name="search"/>
+			<button type="submit" name="search-button">Search</button>
+		</form>
+	</div>
+	<div id = "subjects">
+	{% if size == 0 %}
+		<p> {{user.first_name}} currently does not have a semester ready.</p>
+	{% else %}
+		<p> {{user.first_name}}'s current semester : </p>
+		{% for semester in s_list %}
+			<p>
+				<p>Semester {{current_sem.semester_no}}</p>
+				<p>{{current_sem.start_date}} - {{current_sem.end_date}}</p>
+			</p> 
+		{% endfor %}
+	{% endif %}
+	<div id = "current">
+	{% if subjects != None %}
+	<p> Subjects: </p>
+	{% for subject in subjects %}
+		<p><a href="#"> {{subject.subject}} </a></p>
+		<p> Present = {{subject.present}}</p>
+		<p> Absent = {{subject.absent}} </p> 
+		<p> Total = {{subject.total}} </p>
+		<p> Percent = {{subject.percent}}% </p>
+		<p> Safe bunks = {{subject.safe_bunks}} </p>
+	{% endfor %}
+	{% endif %}
+	</div>
+	</div>
+	<div style ="position: absolute; margin-top: -540px; margin-left: 540px;" id = "profile-page">
+			<!--Display user data-->
+		<p> Name: {{user.first_name}} {{user.last_name}} </p>
+		<p> Institute: {{user.profile.institute }} </p>
+		<p> Location: {{user.profile.location}} </p>
+	</div>
+{% endblock %}

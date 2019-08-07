@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<style type="text/css">
-    #navbar
-    {
-        background-color: #2471A3;
-    }
-    #input
-    {
-        position: relative;
-        top: 50%;
-        left: 42.5%;
-    }
-</style>
 <html>
-    <head>
-    	<!-- Required meta tags always come first -->
+<head>
+	<title>Search page</title>
+</head>
+<style type="text/css">
+	#navbar
+	{
+		background-color: #2471A3;
+		color: white;
+	}
+	#search-results
+	{
+		margin-left: 300px;
+		margin-top: 100px;
+	}
+</style>
+<body style="font-size: 12px;">
+
+		<!-- Required meta tags always come first -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <title> Summary </title>
-    </head>
-    <body style="font-size: 12px;">
-        <nav id = "navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-            {% block back %}
-            {% endblock %}
-        </nav>
-    	<div id = #subjectTable>
-    		{% block content %}
-    		{% endblock %}
-    	</div>
-    </body>
+
+
+        <!--Navigation bar-->
+        {% block navbar %}
+        {% endblock %}
+
+        <!--Search results-->
+        {% block content %}
+        {% endblock %}
+
+
+</body>
 </html>

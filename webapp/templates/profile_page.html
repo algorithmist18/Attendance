@@ -1,15 +1,123 @@
 {% extends 'profile.html' %}
+{% block content %}
+<span class = "navbar-brand" style="color: white; font-size: 12px;">Attendance </span> 
+<a class="navbar-brand" style = "color: white; margin-left: 1000px; font-size: 12px;" href="{% url 'edit_profile' %}?user={{user.username}}">Edit profile</a>
+<a class="navbar-brand" style = "color: white; margin-left: 10px; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+{% endblock %}
 {% block subject_details %}
-	{% if size == 0 %}
-		<p> You currently do not have a semester ready.</p>
+	
+	{% if classes == None %}
+		<center>
+			<p style="position: absolute; margin-top: -50px; margin-left: 580px;"> You do not have any classes today. </p>
+		</center>
 	{% else %}
-		<p> Your subjects : </p>
-		{% for subject in subjects %}
-			<p>
-				<a href = "#">{{subject.subject}}</a>
-				<p>{{subject.threshold}}%</p>
-				<p>{{subject.percent}}</p>
-			</p> 
+		<div style = "margin-top: 30px; margin-left: 50px; id = "classes">
+			Classes today:
+		{% for cls in classes %}
+			<a href = "showsub?user={{user.username}}&s_id={{current_sem.semester_no}}&subject={{cls.subject}}"> {{cls.subject}} </a> |
 		{% endfor %}
+		</div>
 	{% endif %}
+
+	<div id = "search-bar">
+		<form method="post" action="{% url 'profile' %}?user={{user.username}}">
+			{% csrf_token %}
+			<input type="text" placeholder="Search.." name="search"/>
+			<button type="submit" name="search-button">Search</button>
+		</form>
+	</div>
+	<div id = "subjects">
+	{% if current_sem == None %}
+		<p style="margin-left: 50px;"> You currently do not have a semester ready.</p>
+		<p style="margin-left: 50px;"> Enter a new semester <a href = "sem_form?user={{user.username}}"> here.</a></p>
+	{% else %}
+		<p> Your current semester : </p>
+		<p>
+			<a href = "semester?user={{user.username}}&s_id={{current_sem.semester_no}}">Semester {{current_sem.semester_no}}</a>
+			<p>{{current_sem.start_date}} - {{current_sem.end_date}}</p>
+		</p> 
+	{% endif %}
+	<div id = "current">
+	{% if subjects != None %}
+	<p> Subjects: </p>
+	{% for subject in subjects %}
+		<p> <a href = "showsub?user={{user.username}}&s_id={{current_sem.semester_no}}&subject={{subject.subject}}"> {{subject.subject}} </a></p>
+		<p> {{subject.percent}}% </p>
+		<p> Safe bunks = {{subject.safe_bunks}} </p>
+	{% endfor %}
+	{% endif %}
+	</div>
+
+	</div>
+	{% if blobs == None %}
+		<center>
+			<p style="position: absolute; margin-top: -50px; margin-left: 580px;"> You do not have a routine ready. </p>
+		</center>
+	{% else %}
+		<div style ="margin-top: -540px; float: left;" id = "routine">
+		<center>
+			<p>Your routine for Semester #{{current_sem.semester_no}} </p>
+		<div class = "days">
+		<p> Monday: </p>
+		{% for blob in blobs %}
+			{% if blob.day == 'Monday' %}
+				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+			{% endif %}
+		{% endfor %}
+		</div>
+		<div class = "days">
+		<p> Tuesday: </p>
+		{% for blob in blobs %}
+			{% if blob.day == 'Tuesday' %}
+				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+			{% endif %}
+		{% endfor %}
+		</div>
+		<div class = "days">
+		<p> Wednesday: </p>
+		{% for blob in blobs %}
+			{% if blob.day == 'Wednesday' %}
+				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+			{% endif %}
+		{% endfor %}
+		</div>
+		<div class="days">
+		<p> Thursday: </p>
+		{% for blob in blobs %}
+			{% if blob.day == 'Thursday' %}
+				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+			{% endif %}
+		{% endfor %}
+		</div>
+		<div class="days">
+		<p> Friday: </p>
+		{% for blob in blobs %}
+			{% if blob.day == 'Friday' %}
+				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+			{% endif %}
+		{% endfor %}
+		</div>
+		</center>
+	{% endif %}
+
+	<!--Displaying other semesters-->
+
+	{% if s_list != None %}
+	<div id = "prev-sem">
+		<p> Your other semesters: </p>
+		{% for semester in s_list %}
+		<p>
+			<a href = "semester?user={{user.username}}&s_id={{semester.semester_no}}">Semester {{semester.semester_no}}</a>
+			<p>{{semester.start_date}} - {{semester.end_date}}</p>
+		</p> 
+		{% endfor %}
+	</div>
+	{% endif %}
+{% endblock %}
+{% block semester %}
+{% if s_list != None %}
+<center>
+<p style="position: absolute; margin-top: 300px; margin-left: 580px;"> Enter a new semester <a href = "sem_form?user={{user.username}}"> here.</a></p>
+</center>
+{% endif %}
 {% endblock %}

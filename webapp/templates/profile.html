@@ -6,38 +6,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
 	<title> Subjects </title>
 
 	<style type="text/css">
+
+		#current
+		{
+			float: left;
+		}
 
 		.navbar-brand
 		{
 			float: left;
 		}
-
 		#subjectTitle
 		{
 			padding-left: 500px;
 			padding-right: 300px;
 		}
-
-
 		#subjectForm
 		{
 			padding-left: 500px;
 			padding-top: 250px;
 		}
-
 		#buttons
 		{
 			position: absolute;
 			bottom: -40px;
 		}
-
 		#navbar
 		{
 			background-color: #2471A3;
@@ -50,30 +51,46 @@
 
 		#subjects
 		{
-			float: left;
-			margin-top: 100px;
+			margin-top: 40px;
 			margin-left: 50px;
-			margin-right: 200px;
 		}
+
+		body
+		{
+			font-size: 12px;
+		}
+
+		#search-bar
+		{
+			margin-top: 20px;
+			margin-left: 1030px;
+		}
+
+		#prev-sem
+		{
+			margin-left: 1100px;
+			margin-top: -80px;
+		}
+
 	</style>
 </head>
-<body>
+<body style="">
+
+
 	<nav id = "navbar" class="navbar navbar-light">
 		<div id="nav-elems">
-  			<a class="navbar-brand" style = "color: white; font-size: 18px;" href="{% url 'logout' %}">Logout</a>
-        		{% block content %}
-    			{% endblock %}
+        {% block content %}
+    	{% endblock %}
     	</div>
 	</nav>
 	<!--Subjects for user-->
-	<div id = "subjects">
-		{% block subject_details %}
-		{% endblock %}
-	</div>
-	<p style="margin-top: 100px;"> Enter a new semester <a href = "#"> here. </a></p>
+	{% block subject_details %}
+	{% endblock %}
+
+	{% block semester %}
+	{% endblock %}
 	<!--Performance analysis-->
 	<div>
-
 	</div>
 </body>
 </html>

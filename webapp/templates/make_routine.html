@@ -1,0 +1,28 @@
+{% extends 'make_routine_base.html' %}
+{% block navbar %}
+  	<a class="navbar-brand" style = "color: white; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+    <a class="navbar-brand" style = "margin-left: 1000px; color: white; font-size: 12px;" href="{% url 'show_semester' %}?user={{user.username}}&s_id={{semester.semester_no}}">Semester {{semester.semester_no}} </a>
+    <a class="navbar-brand" style = "margin-left: 10px;color: white; font-size: 12px;" href="{% url 'profile' %}?user={{user.username}}">Hello, {{user.username}}</a>
+{% endblock %}
+{% block content %}
+<center>
+	<p style="margin-top: 100px;"> Enter routine for <a href="{% url 'show_semester' %}?user={{user.username}}&s_id={{semester.semester_no}}">Semester {{semester.semester_no}} </a></p>
+</center>
+<div style="margin-top: 70px; margin-left: 570px;" id = "routine">
+<form method = "post" action = "{% url 'routine' %}?user={{user.username}}&s_id={{semester.semester_no}}">
+	{% csrf_token %}
+	Day: <input style="margin-left: 30px;" type="text" name="day">
+	<br><br>Start time: <input type="text" name="start_time" placeholder="00:00-24:00">
+	<br><br>End-time: <input style="margin-left: 5px;"type="text" name="end_time" placeholder="00:00-24:00">
+	<br><br>
+	Subject: 
+	<select style="margin-left: 10px;"name = "subject">
+		{% for subject in subjects %}
+			<option value = "{{subject.subject}}">{{subject.subject}}</option>
+		{% endfor %}
+	</select>
+	<br><br><input style="font-size: 12px; margin-left: 65px;" class = "btn btn-success" type="submit" name = "action" value = "Save">
+</form>
+</div>
+<p style="margin-left: 600px; margin-top: 30px;"> View your routine <a href = "{% url 'display_routine' %}?user={{user.username}}&s_id={{semester.semester_no}}"> here. </a></p>
+{% endblock %}

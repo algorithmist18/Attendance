@@ -1,0 +1,19 @@
+{% extends 'semester_display_base.html' %}
+{% block content %}
+<nav id = "navbar" class="navbar navbar-light">
+  	<a class="navbar-brand" style = "color: white; font-size: 14px;" href="{% url 'logout' %}">Logout</a>
+    <a class="navbar-brand" style = "color: white; font-size: 14px;" href="{% url 'profile' %}?user={{user.username}}">Hello, {{user.username}}</a></p>
+</nav>
+{% endblock %}
+{% block subject_details %}
+	<center>
+	<div id = "subjects">
+	<p> {{user.username}}, Are you sure you want to delete semester {{semester.semester_no}} and all it's subjects? </p>
+	<form method="post" action="{% url 'delete_sem' %}?user={{user.username}}&s_id={{semester.semester_no}}">
+		{% csrf_token %}
+		<input type="submit" name="button" value="Delete"/>
+		<input type="submit" name="button" value="Cancel"/>
+	</form>
+	</div>
+	</center>
+{% endblock %}

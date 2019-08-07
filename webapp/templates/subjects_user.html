@@ -2,40 +2,48 @@
 
 {% load staticfiles %}
 
-<style>
-
-.body
-{
-		background-image:url('static/background.JPG');
-		background-repeat:no-repeat;
-		background-size:100%;
-}
-
-</style>
-
 {% block content %}
-
-	<a style = "color: white; font-size: 18px;" class="navbar-brand" href="{% url 'summary' %}?username={{username}}">Summary</a>
-	<span style = "color: white; font-size: 18px;" class="navbar-brand"> Hello, <span id = "username">{{first_name}}</span>.</span>
-
+	<a class="navbar-brand" style = "color: white; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+	<span style = "color: white; font-size: 12px;" class="navbar-brand"> Hello, <a style = "color: white; font-size: 12px;" href = "{% url 'profile' %}?user={{username}}">{{username}}</a>.</span>
 {% endblock %}
 
 {% block subjects %}
-	<div id = "subjectForm" style="padding-top: 180px; padding-left: -2px;">
-		<form action="{% url 'takeSubjects' %}?username={{username}}" method="POST">	
+	{% if message != None %}
+		{% if type == 'success' %}
+			<div class = "alert alert-success">
+				{{message}}
+			</div>
+		{% else %}
+			<div class="alert alert-danger">
+				{{message}}
+			</div>
+		{% endif %}
+	{% endif %}
+	<center>
+		<p style="margin-top: 75px;"> Subjects for Semester {{semester_no}} </p>
+	</center>
+	<div id = "subjectForm" style="padding-top: 70px; padding-left: -10px;">
+		<form action="{% url 'subjects' %}?user={{username}}&s_id={{semester_no}}" method="POST">	
 			{% csrf_token %}
-				<div class="col-xs-6">
-			    	<label for="ex3" style="padding-left: 150px;">Subjects</label>
-			    	<input class="form-control" id="ex3" type="text" name = "subject">
-			    	<label for="ex3" style="padding-left: 150px;">Threshold</label>
-			    	<input class="form-control" id="ex2" type="number" name = "threshold">
+				<div class="col-xs-4">
+			    	<label for="ex3">Subjects</label>
+			    	<input class="form-control" type="text" name = "subject">
+			    	<br>
+			    	<label for="ex3">Threshold</label> 
+			    	<input class="form-control" type="number" name = "threshold">
+			    	<br>
+			    	<label for="ex3">Subject Code</label>
+			    	<input class = "form-control" type="text" name="code"/>
+			    	<br>
+			    	<input type="hidden" name="sem_no" value="{{semester_no}}"/>
+			  	<center>
+			    <div id = "buttons">
+		  			<input style = "font-size: 12px;" type="submit" class="btn btn-primary" value = "Add Subject" onclick = "submitForm()">
+		  			<input style = "font-size: 12px;" type="button" class="btn btn-success" value = "Finish">
+		  				<!--<input style = "font-size: 12px;" type="submit" class="btn btn-success" value = "Change threshold">-->
 		  		</div>
-		  		<div id = "buttons" style = "padding-left: 30px;">
-		  			<input type="submit" class="btn btn-primary" value = "Add Subject" onclick = "submitForm()">
-		  			<input type="button" class="btn btn-success" value = "Finish">
-		  			<input type="submit" class="btn btn-success" value = "Change threshold">
+		  		</center>
 		  		</div>
-		  		<br>
 	  	</form>
   	</div>
 {% endblock %}

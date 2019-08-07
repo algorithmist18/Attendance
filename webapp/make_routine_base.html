@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <style type="text/css">
-    #navbar
-    {
-        background-color: #2471A3;
-    }
-    #input
-    {
-        position: relative;
-        top: 50%;
-        left: 42.5%;
-    }
+#routine
+{
+   margin-left: 100px;
+}
+.navbar
+{
+    background-color: #2471A3;
+}
 </style>
 <html>
     <head>
@@ -20,16 +18,15 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <title> Summary </title>
+        <title> Routine </title>
     </head>
     <body style="font-size: 12px;">
-        <nav id = "navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-            {% block back %}
-            {% endblock %}
-        </nav>
-    	<div id = #subjectTable>
-    		{% block content %}
-    		{% endblock %}
-    	</div>
+
+        {% block navbar %}
+        {% endblock %}
+        <center>
+    	{% block content %}
+    	{% endblock %}
+        </center>
     </body>
 </html>

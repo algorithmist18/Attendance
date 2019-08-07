@@ -1,61 +1,109 @@
-{% extends 'home.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-{% block body %}
-<style type="text/css"> 
-#emailbox
-{
-    padding-left: 80px;
-}
-#passwordbox
-{
-  padding-left: 80px;
-}
-#usernamebox
-{
-  padding-left: 80px;
-}
-#fnbox
-{
-  padding-left: 80px;
-}
-#lnbox
-{
-  padding-left: 80px;
-}
-</style>
-    <div class = "container">
-      <center>
-      <form method = "post">
-        {% csrf_token %}
-        <div class="form-group row">
-          <div id = "usernamebox" class="col-sm-6">
-        <input  type = "text" name = "username" placeholder="Your user name">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div id = "emailbox"  class="col-sm-8">
-        <input type = "email" name = "email" placeholder="Your Email">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div id = "passwordbox" class="col-sm-8">
-          <input type = "password" name = "password"  placeholder="Your Password">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div id = "fnbox"  class="col-sm-8">
-          <input type = "text" name = "first_name" placeholder="Your first name">
-        </div>
-      </div>
-        <div class="form-group row">
-          <div id = "lnbox" class="col-sm-8">
-            <input type = "text" name = "last_name"  placeholder="Your last name">
-          </div>
-        </div>
-        <div class="form-group row">
-        <button class="btn btn-success" href = "{% url 'subjects' %}" id = "myButton"> Register </button>
-        </div>
-      </form>
-    </center>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+      
+      <style type="text/css">
+          
+      .container {
+      
+            text-align: center;
+            width: 400px;
+      }
+          
+      #homePageContainer {
+              
+            margin-top: 150px;
+          
+      }
+          
+          #containerLoggedInPage {
+              
+              margin-top: 60px;
+              
+          }
+
+          
+                      
+          .toggleForms {
+              
+              font-weight: bold;
+              
+          }
+      </style>
+  </head>
+  <body>
+
+  <center>      
+    <h2>Attendance</h2>
+    <p>Be Present. Always.<p>
+  
+  <form style = "font-size: 14px; margin-top: 100px;" method="post" action = "{% url 'register' %}" id = "signUpForm">
+    {% csrf_token %}
+    <center>
+    <div style = "margin-left: 200px;" class="form-group">
+      <label for="exampleInputEmail1">Email:</label>
+     {{form.email}}
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-{% endblock %}
+
+    <div style = "margin-left: 330px;" class="form-group">
+      <label>Username:</label>
+      {{form.username}}
+      <small class="form-text text-muted">{{form.username.help_text}}</small>
+    </div>
+
+    <div class="form-group">
+      <label>First name:</label>
+      {{form.first_name}}
+    </div>
+
+    <div class="form-group">
+      <label>Last name:</label>
+      {{form.last_name}}
+    </div>
+
+     <div class="form-group">
+      <label for="exampleInputEmail1">DOB:</label>
+      {{form.birth_date}}
+      <small class="form-text text-muted">{{form.birth_date.help_text}}</small>
+    </div>
+
+
+    <div style = "margin-left: 330px;" class="form-group">
+      <label for="exampleInputEmail1">Institute:</label>
+      {{form.institute}}
+      <small class="form-text text-muted">Give your institute name in full: Heritage Institute of Technology, Kolkata</small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Password:</label>
+      {{form.password1}}
+      <small class="form-text text-muted">{{form.password.help_text}}</small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Confirmation:</label>
+      {{form.password2}}
+      <small class="form-text text-muted">{{form.password2.help_text}}</small>
+    </div>
+
+    {{form.errors}}
+
+    <input style = "font-size: 12px;" type = "submit" class="btn btn-success" name="action" value="Save">
+  </center>
+  </form>
+    
+  <!-- jQuery first, then Bootstrap JS. -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+  </body>
+</html>

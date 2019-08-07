@@ -6,19 +6,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-	<title> Subjects </title>
+	<title> Semester </title>
 
 	<style type="text/css">
 
-		body
+		#subjects
 		{
 			font-size: 12px;
 		}
-
 		.navbar-brand
 		{
 			float: left;
@@ -29,8 +26,6 @@
 			padding-left: 500px;
 			padding-right: 300px;
 		}
-
-
 		#subjectForm
 		{
 			padding-left: 500px;
@@ -39,8 +34,8 @@
 
 		#buttons
 		{
-			padding-top: 5px;
-			position: relative;
+			position: absolute;
+			bottom: -40px;
 		}
 
 		#navbar
@@ -50,26 +45,28 @@
 
 		#nav-elems
 		{
-			font-size: 14px;
 			color: white;
 		}
 
+		#subjects
+		{
+			float: left;
+			margin-top: 50px;
+			margin-left: 200px;
+			margin-right: 200px;
+		}
 	</style>
 </head>
-
 <body>
-
-	<nav id = "navbar" class="navbar navbar-light">
-		<div id="nav-elems">
-        {% block content %}
-    	{% endblock %}
-    	</div>
-	</nav>
-		<!--Entering subjects-->
-		<div id = "subjectsEntry">
-			{% block subjects %}
-  			{% endblock %}
-  		</div>
-  		
+	
+	<!--Navigation bar-->
+  	{% block content %}
+  	{% endblock %}
+  	
+	<!--Subjects for user-->
+	<center>
+	{% block subject_details %}
+	{% endblock %}
+	</center>
 </body>
 </html>

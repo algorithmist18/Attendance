@@ -1,0 +1,111 @@
+{% extends 'routine_base.html' %}
+{% block content %}
+<nav id = "navbar" class="navbar navbar-light">
+  	<a class="navbar-brand" style = "color: white; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
+    <a class="navbar-brand" style = "margin-left: 1100px; color: white; font-size: 12px;" href="{% url 'show_semester' %}?user={{user.username}}&s_id={{semester.semester_no}}">Semester {{semester.semester_no}} </a>
+    <a class="navbar-brand" style = "margin-left: 10px;color: white; font-size: 12px;" href="{% url 'profile' %}?user={{user.username}}">Hello, {{user.username}}</a>
+</nav>
+{% endblock %}
+
+{% block routine %}
+	
+	<p style="margin-top: 60px">Your routine for {{semester.semester_no}} </p>
+	<center>
+	<div class = "days">
+	<p> Monday: </p>
+	{% for blob in blobs %}
+		{% if blob.day == 'Monday' %}
+			<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+		{% endif %}
+	{% endfor %}
+	</div>
+
+	<div class = "days">
+	<p> Tuesday: </p>
+	{% for blob in blobs %}
+		{% if blob.day == 'Tuesday' %}
+			<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+		{% endif %}
+	{% endfor %}
+	</div>
+
+	<div class = "days">
+	<p> Wednesday: </p>
+	{% for blob in blobs %}
+		{% if blob.day == 'Wednesday' %}
+			<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+		{% endif %}
+	{% endfor %}
+	</div>
+
+	<div class="days">
+	<p> Thursday: </p>
+	{% for blob in blobs %}
+		{% if blob.day == 'Thursday' %}
+			<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+		{% endif %}
+	{% endfor %}
+	</div>
+	<div class="days">
+	<p> Friday: </p>
+	{% for blob in blobs %}
+		{% if blob.day == 'Friday' %}
+			<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+		{% endif %}
+	{% endfor %}
+	</div>
+	</center>
+	<!--
+	<table class="table table-sm table-bordered">
+		<thead>
+    		<tr>
+    			<th scope="col"></th>
+      			{% for timing in timings %}
+      				<th scope="col">{{timing}}</th> 
+      			{% endfor %}
+    		</tr>
+ 		</thead>
+	  	<tbody>
+	    <tr>
+	      <th scope="row">Monday</th>
+	      	{% for blob in blobs %}
+				{% if blob.day == 'Monday' %}
+					<td>{{ blob.subject.subject }}</td>
+				{% endif %}
+		  	{% endfor %}
+	    </tr>
+	    <tr>
+	      <th scope="row">Tuesday</th>
+	      	{% for blob in blobs %}
+				{% if blob.day == 'Tuesday' %}
+					<td> {{ blob.subject.subject }}</td>
+				{% endif %}
+		  	{% endfor %}
+	    </tr>
+	     <tr>
+	      <th scope="row">Wednesday</th>
+	      	{% for blob in blobs %}
+				{% if blob.day == 'Wednesday' %}
+					<td> {{ blob.subject.subject }}</td>
+				{% endif %}
+		  	{% endfor %}
+	    </tr>
+	     <tr>
+	      <th scope="row">Thursday</th>
+	      	{% for blob in blobs %}
+				{% if blob.day == 'Thursday' %}
+					<td> {{ blob.subject.subject }}</td>
+				{% endif %}
+		  	{% endfor %}
+	    </tr>
+	     <tr>
+	      <th scope="row">Friday</th>
+	      	{% for blob in blobs %}
+				{% if blob.day == 'Friday' %}
+					<td> {{ blob.subject.subject }}</td>
+				{% endif %}
+		  	{% endfor %}
+	    </tr>
+	   </tbody>
+	</table>-->
+{% endblock %}
