@@ -291,9 +291,7 @@ def register(request):
 
 		form = RegistrationForm(request.POST)
 
-		if form.is_valid:
-
-			print('Form is valid.')
+		if form.is_valid():
 
 			"""
 			email = form.cleaned_data['email']
