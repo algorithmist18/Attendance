@@ -9,8 +9,7 @@ from webapp.forms import LoginForm, RegistrationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password, check_password
 from django.conf import settings
-from bs4 import BeautifulSoup as bs 
-import requests, math, datetime
+import datetime
 # Create your views here.
 def index(request):
 
@@ -294,8 +293,6 @@ def register(request):
 		form = RegistrationForm(request.POST)
 
 		if form.is_valid():
-
-
 			"""
 			email = form.cleaned_data['email']
 			password = request.POST.get('password', None)
