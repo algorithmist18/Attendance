@@ -1,6 +1,6 @@
 
 A web-app for managing your attendance throughout the semester. 
 
-Details coming soon.
+Here's a link to the website: [Attendance](https://attendance.pythonanywhere.com/webapp/home)
 
-[Attendance](https://attendance.pythonanywhere.com/webapp/home)
+
