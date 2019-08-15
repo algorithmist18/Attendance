@@ -64,13 +64,14 @@
           (
             function()
             {
-              present.value = (Number(present.value) + 1).toString();
-              total.value = (Number(total.value) + 1).toString();
-              percent.value = ((present.value / total.value)*100);
-               if(!Number.isInteger((present.value / total.value)))
-               {
+                present.value = (Number(present.value) + 1).toString();
+                total.value = (Number(total.value) + 1).toString();
+                percent.value = ((present.value / total.value)*100);
+
+                if(!Number.isInteger((present.value / total.value)))
+                {
                   percent.value = ((present.value / total.value)*100).toFixed(2);
-               }
+                }
          
                 if(percent.value > threshold.value)
                 {
@@ -80,53 +81,80 @@
                 {
                    safe.value = 0;
                 }
+
+                if(present.value == total.value)
+                {
+                    //Perfect attendance
+                    safe.value = present.value;
+                }
+
                 safe.value = Math.floor(Number(safe.value));
                 percent.value += '%';
+
              });
           
             $(".ab_button").click
              (
-            function()
-            {
-              total.value = (Number(total.value) + 1).toString();
-                      percent.value = ((present.value / total.value)*100);
+              function()
+              {
+                  total.value = (Number(total.value) + 1).toString();
+                  percent.value = ((present.value / total.value)*100);
                     
                   if(!Number.isInteger(percent.value))
-                 {
+                  {
                     percent.value = ((present.value / total.value)*100).toFixed(2);
-                 }
+                  }
        
-                if(percent.value > threshold.value)
-                {
-                   safe.value = ((((Number(present.value)*100) - (Number(total.value) * threshold.value)))/(threshold.value));
-                }
-                else
-                {
-                   safe.value = 0;
-                }
-                safe.value = Math.floor(Number(safe.value));
-                percent.value += '%';
-            }); 
+                  if(percent.value > threshold.value)
+                  {
+                    safe.value = ((((Number(present.value)*100) - (Number(total.value) * threshold.value)))/(threshold.value));
+                  }
+                  else
+                  {
+                     safe.value = 0;
+                  }
+
+                  if(present.value == total.value)
+                  {
+                      //Perfect attendance
+                      safe.value = present.value;
+                  }
+
+                  safe.value = Math.floor(Number(safe.value));
+                  percent.value += '%';
+
+              });
+
             $(".inc_t").click(
-            function()
-            {
-                total.value = (Number(total.value) + 1).toString();
-                percent.value = ((present.value / total.value)*100).toFixed(2);
-                if(!Number.isInteger(percent.value))
-                 {
+              function()
+              {
+                  total.value = (Number(total.value) + 1).toString();
+                  percent.value = ((present.value / total.value)*100).toFixed(2);
+
+                  if(!Number.isInteger(percent.value))
+                  {
                     percent.value = ((present.value / total.value)*100).toFixed(2);
-                 }
-               if(percent.value > threshold.value)
-                {
-                   safe.value = ((((Number(present.value)*100) - (Number(total.value) * threshold.value)))/(threshold.value));
-                }
-                else
-                {
-                   safe.value = 0;
-                }
-                safe.value = Math.floor(Number(safe.value));
-                percent.value += '%';
-            }); 
+                  }
+
+                  if(percent.value > threshold.value)
+                  {
+                    safe.value = ((((Number(present.value)*100) - (Number(total.value) * threshold.value)))/(threshold.value));
+                  }
+                  else
+                  {
+                    safe.value = 0;
+                  }
+
+                  if(present.value == total.value)
+                  {
+                      //Perfect attendance
+                      safe.value = present.value;
+                  }
+
+                  safe.value = Math.floor(Number(safe.value));
+                  percent.value += '%';
+              });
+
             $(".dec_t").click(
             function()
             {
@@ -172,6 +200,13 @@
                       {
                          safe.value = 0;
                       }
+
+                      if(present.value == total.value)
+                      {
+                          //Perfect attendance
+                          safe.value = present.value;
+                      }
+
                       safe.value = Math.floor(Number(safe.value));
                       percent.value += '%';   
                   }
@@ -208,11 +243,17 @@
                   {
                      safe.value = 0;
                   }
+
+                  if(present.value == total.value)
+                  {
+                      //Perfect attendance
+                      safe.value = present.value;
+                  }
+                      
                   safe.value = Math.floor(Number(safe.value));
                   percent.value += '%';
                 }
-
-                alert(percent.value);
+               alert(percent.value);
             });
 
             $(".dec_p").click(
@@ -242,6 +283,13 @@
                     {
                       safe.value = 0;
                     }
+
+                    if(present.value == total.value)
+                    {
+                        //Perfect attendance
+                        safe.value = present.value;
+                    }
+                    
                     safe.value = Math.floor(Number(safe.value));
                     percent.value += '%';
                 }

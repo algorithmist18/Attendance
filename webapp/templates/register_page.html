@@ -11,7 +11,8 @@
       
       <style type="text/css">
           
-      .container {
+      .container 
+      {
       
             text-align: center;
             width: 400px;
@@ -27,81 +28,90 @@
               
               margin-top: 60px;
               
-          }
-
-          
-                      
-          .toggleForms {
-              
-              font-weight: bold;
-              
+          }  
+          #header
+          {
+              margin-top: 60px;
           }
       </style>
   </head>
   <body>
-
-  <center>      
+  <center> 
+  <div id = "header">     
     <h2>Attendance</h2>
     <p>Be Present. Always.<p>
-  
-  <form style = "font-size: 14px; margin-top: 100px;" method="post" action = "{% url 'register' %}" id = "signUpForm">
+  </div>
+  <form style = "font-size: 14px; margin-top: 60px;" method="post" action = "{% url 'register' %}" id = "signUpForm">
     {% csrf_token %}
     <center>
-    <div style = "margin-left: 200px;" class="form-group">
+      <div id = "errors">
+       {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div style = "width: 500px;" class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div style = "width: 500px;" class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if email_error != None %}
+          <div style = "width: 500px;" class="alert alert-danger">
+            <strong> The email ID already has an account. </strong>
+          </div>
+      {% endif %}
+      </div>
+    <div style = "margin-left: 245px;" class="form-group">
       <label for="exampleInputEmail1">Email:</label>
-     {{form.email}}
+     <span style="margin-left: 40px;">{{form.email}}</span>
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-
-    <div style = "margin-left: 330px;" class="form-group">
+    <div style = "margin-left: 350px;" class="form-group">
       <label>Username:</label>
-      {{form.username}}
+      <span style = "margin-left: 10px;">{{form.username}}</span>
       <small class="form-text text-muted">{{form.username.help_text}}</small>
+      {% if username_error != None %}
+      <div class="alert alert-danger">
+        <p> Username already taken. </p>
+      </div>
+      {% endif %}
     </div>
-
-    <div class="form-group">
+    <div style = "margin-left: 10px;" class="form-group">
       <label>First name:</label>
-      {{form.first_name}}
+      <span style = "margin-left: 10px;">{{form.first_name}}</span>
     </div>
-
-    <div class="form-group">
+    <div style = "margin-left: 10px;" class="form-group">
       <label>Last name:</label>
-      {{form.last_name}}
+      <span style = "margin-left: 10px;">{{form.last_name}}</span>
     </div>
-
-     <div class="form-group">
+     <div style = "margin-left: 180px;" class="form-group">
       <label for="exampleInputEmail1">DOB:</label>
-      {{form.birth_date}}
+      <span style = "margin-left: 45px;">{{form.birth_date}}</span>
       <small class="form-text text-muted">{{form.birth_date.help_text}}</small>
     </div>
-
-
-    <div style = "margin-left: 330px;" class="form-group">
+    <div style = "margin-left: 370px;" class="form-group">
       <label for="exampleInputEmail1">Institute:</label>
-      {{form.institute}}
+      <span style="margin-left: 25px; width: 100px;">{{form.institute}}</span>
       <small class="form-text text-muted">Give your institute name in full: Heritage Institute of Technology, Kolkata</small>
     </div>
-
-
-    <div class="form-group">
+    <div style = "margin-left: 15px;"class="form-group">
       <label for="exampleInputEmail1">Password:</label>
-      {{form.password1}}
-      <small class="form-text text-muted">{{form.password.help_text}}</small>
+      <span style="margin-left: 15px;">{{form.password1}}</span>
+      <small class="form-text text-muted">{{form.password1.help_text}}</small>
     </div>
-
-
-    <div class="form-group">
+    <div style = "margin-left: 270px;" class="form-group">
       <label for="exampleInputEmail1">Confirmation:</label>
       {{form.password2}}
       <small class="form-text text-muted">{{form.password2.help_text}}</small>
     </div>
-
-    {{form.errors}}
-
     <input style = "font-size: 12px;" type = "submit" class="btn btn-success" name="action" value="Save">
   </center>
-  </form>
-    
+  </form>   
   <!-- jQuery first, then Bootstrap JS. -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>

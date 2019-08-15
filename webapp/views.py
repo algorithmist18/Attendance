@@ -1,4 +1,3 @@
-
 #Importing libraries
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
@@ -187,6 +186,8 @@ def profile(request):
 				print('Index error not going to happen.')
 				period_time = datetime.timedelta(hours = blobs[0].end_time.hour, minutes = blobs[0].end_time.minute) - datetime.timedelta(hours = blobs[0].start_time.hour, minutes = blobs[0].start_time.minute)
 				timings = sorted(set(timings_list))
+				args = {'user' : user, 'current_sem' : current_semester, 'blobs' : blobs, 'timings' : timings, 'time' : period_time, 's_list' : s_list, 'size' : l, 'subjects' : subject_list, 'classes' : classes_today}
+				return render(request, 'profile_page.html', args)
 			else:
 				#User has no routine ready yet
 				args = {'user' : user, 'current_sem' : current_semester, 'message' : 'You do not have a routine ready', 's_list' : s_list, 'size' : l, 'subjects' : subject_list, 'classes' : classes_today}
@@ -292,9 +293,8 @@ def register(request):
 
 		form = RegistrationForm(request.POST)
 
-		if form.is_valid:
+		if form.is_valid():
 
-			print('Form is valid.')
 
 			"""
 			email = form.cleaned_data['email']
@@ -305,6 +305,22 @@ def register(request):
 			institute = request.POST.get('institute')
 			birth_date = request.POST.get('birth_date')
 			"""
+
+			#Checking email and username validation
+
+			email = form.cleaned_data['email']
+			username = form.cleaned_data['username']
+
+			if User.objects.filter(username = username).exists():
+
+				#Username taken
+				return render(request, 'register_page.html', {'form' : form, 'username_error' : 'Username already taken.'})
+
+			if User.objects.filter(email = email).exists():
+
+				#Email ID exists
+				print('Email address already taken.')
+				return render(request, 'register_page.html', {'form': form, 'email_error' : 'Email already taken.'})
 
 			#Save user to database
 
@@ -345,12 +361,10 @@ def login(request):
 
 	if request.method == 'POST':
 
-		print('Attempting to login..')
+		#Attempting to login
 
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-
-		print('Username = {}, Password = {}'.format(username, password))
 
 		user = authenticate(username = username, password = password)
 
@@ -370,8 +384,6 @@ def login(request):
 		else:
 
 			#Authentication failure
-
-			print('Password do not match.')
 			return render(request, 'homepage.html')
 
 	return render(request, 'homepage.html')
@@ -382,23 +394,17 @@ def summary(request):
 
 	if request.method == 'POST':
 
-		print('Post request sent.')
 		sname_list = request.POST.get('sub_name')
-		print(sname_list)
 
 	username = request.GET.get('username', '')
-	print('Method summary() entered with username {}'.format(username))
 
 	try:
 		user = User.objects.get(username = username)
 		try:
-
 			q = Subject.objects.filter(user = user)
 			s_list = []
-
 			for e in q.all():
 				s_list.append(e)
-
 			print(Subject.objects.filter(user = user).values_list('subject'))
 
 		except Subject.DoesNotExist:

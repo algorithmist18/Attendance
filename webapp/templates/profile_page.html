@@ -5,7 +5,6 @@
 <a class="navbar-brand" style = "color: white; margin-left: 10px; font-size: 12px;" href="{% url 'logout' %}">Logout</a>
 {% endblock %}
 {% block subject_details %}
-	
 	{% if classes == None %}
 		<center>
 			<p style="position: absolute; margin-top: -50px; margin-left: 580px;"> You do not have any classes today. </p>
@@ -18,7 +17,6 @@
 		{% endfor %}
 		</div>
 	{% endif %}
-
 	<div id = "search-bar">
 		<form method="post" action="{% url 'profile' %}?user={{user.username}}">
 			{% csrf_token %}
@@ -47,21 +45,20 @@
 	{% endfor %}
 	{% endif %}
 	</div>
-
 	</div>
 	{% if blobs == None %}
 		<center>
 			<p style="position: absolute; margin-top: -50px; margin-left: 580px;"> You do not have a routine ready. </p>
 		</center>
 	{% else %}
-		<div style ="margin-top: -540px; float: left;" id = "routine">
+		<div style ="position: absolute; margin-top: -90px; float: left;" id = "routine">
 		<center>
 			<p>Your routine for Semester #{{current_sem.semester_no}} </p>
 		<div class = "days">
 		<p> Monday: </p>
 		{% for blob in blobs %}
 			{% if blob.day == 'Monday' %}
-				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+				<p> <a href = "showsub?user={{user.username}}&s_id={{current_sem.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
 			{% endif %}
 		{% endfor %}
 		</div>
@@ -69,7 +66,7 @@
 		<p> Tuesday: </p>
 		{% for blob in blobs %}
 			{% if blob.day == 'Tuesday' %}
-				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+				<p> <a href = "showsub?user={{user.username}}&s_id={{current_sem.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
 			{% endif %}
 		{% endfor %}
 		</div>
@@ -77,7 +74,7 @@
 		<p> Wednesday: </p>
 		{% for blob in blobs %}
 			{% if blob.day == 'Wednesday' %}
-				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+				<p> <a href = "showsub?user={{user.username}}&s_id={{current_sem.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
 			{% endif %}
 		{% endfor %}
 		</div>
@@ -85,7 +82,7 @@
 		<p> Thursday: </p>
 		{% for blob in blobs %}
 			{% if blob.day == 'Thursday' %}
-				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+				<p> <a href = "showsub?user={{user.username}}&s_id={{current_sem.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
 			{% endif %}
 		{% endfor %}
 		</div>
@@ -93,7 +90,7 @@
 		<p> Friday: </p>
 		{% for blob in blobs %}
 			{% if blob.day == 'Friday' %}
-				<p> <a href = "showsub?user={{user.username}}&s_id={{semester.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
+				<p> <a href = "showsub?user={{user.username}}&s_id={{current_sem.semester_no}}&subject={{blob.subject.subject}}">{{ blob.subject.subject }}</a> - {{blob.start_time}} {{blob.end_time}} </p>
 			{% endif %}
 		{% endfor %}
 		</div>
@@ -103,7 +100,7 @@
 	<!--Displaying other semesters-->
 
 	{% if s_list != None %}
-	<div id = "prev-sem">
+	<div style="margin-top: -280px;" id = "prev-sem">
 		<p> Your other semesters: </p>
 		{% for semester in s_list %}
 		<p>
@@ -117,7 +114,9 @@
 {% block semester %}
 {% if s_list != None %}
 <center>
-<p style="position: absolute; margin-top: 300px; margin-left: 580px;"> Enter a new semester <a href = "sem_form?user={{user.username}}"> here.</a></p>
+<p style="position: absolute; margin-top: 500px; margin-left: 580px;"> 
+	Enter a new semester <a href = "sem_form?user={{user.username}}"> here.</a>
+</p>
 </center>
 {% endif %}
 {% endblock %}
